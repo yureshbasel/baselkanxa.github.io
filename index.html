@@ -1,233 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>YURESH BASEL | Portfolio</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-:root{
-  --bg:#0f172a;
-  --card:#1e293b;
-  --text:#e5e7eb;
-  --accent:#38bdf8;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
-}
-
-/* Flying background */
-.floating span{
-  position:fixed;
-  bottom:-100px;
-  width:40px;
-  height:40px;
-  background:rgba(56,189,248,0.15);
-  animation:fly 18s linear infinite;
-}
-.floating span:nth-child(1){left:10%}
-.floating span:nth-child(2){left:30%;width:60px;height:60px}
-.floating span:nth-child(3){left:50%}
-.floating span:nth-child(4){left:70%;width:80px;height:80px}
-.floating span:nth-child(5){left:90%}
-@keyframes fly{
-  to{transform:translateY(-130vh) rotate(360deg)}
-}
-
-/* Header */
-header{
-  text-align:center;
-  padding:90px 20px;
-}
-.logo{
-  width:120px;
-  height:120px;
-  margin:auto;
-  border-radius:50%;
-  background:linear-gradient(135deg,#38bdf8,#2563eb);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:40px;
-  font-weight:bold;
-  animation:float 4s ease-in-out infinite;
-}
-@keyframes float{
-  50%{transform:translateY(-15px)}
-}
-h1 span{color:var(--accent)}
-
-.typing{
-  font-size:20px;
-  margin-top:10px;
-  white-space:nowrap;
-  overflow:hidden;
-  border-right:2px solid;
-  width:0;
-  animation:typing 4s steps(30,end) forwards;
-}
-@keyframes typing{
-  to{width:100%}
-}
-
-/* Layout */
-.container{
-  max-width:1000px;
-  margin:auto;
-  padding:20px;
-}
-section{
-  background:var(--card);
-  padding:30px;
-  margin:25px 0;
-  border-radius:15px;
-  animation:fadeUp 1s forwards;
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(40px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-/* Skills */
-.bar{
-  height:8px;
-  background:#334155;
-  border-radius:5px;
-  overflow:hidden;
-}
-.bar span{
-  display:block;
-  height:8px;
-  background:var(--accent);
-  animation:load 2s;
-}
-@keyframes load{from{width:0}}
-
-/* Buttons */
-.btn{
-  display:inline-block;
-  padding:12px 26px;
-  background:var(--accent);
-  color:black;
-  border-radius:25px;
-  font-weight:bold;
-  margin:10px;
-  transition:.3s;
-}
-.btn:hover{transform:scale(1.1)}
-
-/* Social */
-.social a{
-  margin:0 10px;
-  font-size:22px;
-}
-
-/* Contact form */
-input,textarea{
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  border-radius:8px;
-  border:none;
-  outline:none;
-}
-textarea{resize:none}
-
-/* WhatsApp */
-.whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  color:white;
-  padding:14px 18px;
-  border-radius:50%;
-  font-size:22px;
-  text-decoration:none;
-}
-
-footer{
-  text-align:center;
-  opacity:.7;
-  padding:25px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuresh - Creative Web Developer & UI Animator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            --text: #ffffff;
+            --accent-cyan: #00ffff;
+            --accent-purple: #8a2be2;
+            --shadow: rgba(0, 255, 255, 0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Navigation */
+        nav { position: fixed; top: 0; width: 100%; background: rgba(10,10,10,0.9); z-index: 100; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: var(--text); text-decoration: none; margin: 0 15px; transition: color 0.3s; }
+        nav a:hover { color: var(--accent-cyan); }
+        
+        /* Hero Section */
+        #hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding-top: 80px; }
+        #hero h1 { font-size: 4rem; font-weight: 600; text-align: center; z-index: 2; background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        #hero .title { font-size: 2rem; margin-top: 10px; }
+        #hero .tagline { font-size: 1.5rem; margin-top: 20px; }
+        
+        /* Sections */
+        section { padding: 100px 0; min-height: 100vh; }
+        .fade-in { opacity: 0; transform: translateY(50px); transition: all 0.8s ease; }
+        .fade-in.in-view { opacity: 1; transform: translateY(0); }
+        
+        /* Interactive Elements */
+        .btn { background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple)); color: #0a0a0a; padding: 15px 30px; border: none; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--shadow); }
+        
+        .card { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 20px; margin: 20px 0; transition: all 0.3s ease; cursor: pointer; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px var(--shadow); }
+        
+        .skill-list { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill { background: var(--accent-cyan); color: #0a0a0a; padding: 10px 15px; border-radius: 20px; font-size: 0.9rem; opacity: 0; transform: scale(0.8); transition: all 0.5s ease; }
+        .skill.in-view { opacity: 1; transform: scale(1); }
+        
+        /* Cursor Light */
+        .cursor-light { position: fixed; width: 100px; height: 100px; background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%); pointer-events: none; z-index: 10; opacity: 0; transition: opacity 0.2s; }
+        
+        /* Responsive */
+        @media (max-width: 768px) { #hero h1 { font-size: 2.5rem; } section { padding: 50px 0; } nav { flex-direction: column; } }
+    </style>
 </head>
-
 <body>
+    <!-- Navigation -->
+    <nav>
+        <div>Yuresh</div>
+        <div>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#achievements">Achievements</a>
+            <a href="#projects">Projects</a>
+            <a href="#career">Career</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
 
-<!-- Background -->
-<div class="floating">
-  <span></span><span></span><span></span><span></span><span></span>
-</div>
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <h1>Yuresh</h1>
+            <p class="title">Creative Web Developer & UI Animator</p>
+            <p class="tagline">Building modern, animated, and interactive web experiences</p>
+            <button class="btn" onclick="scrollToSection('about')">Explore My Work</button>
+        </div>
+    </section>
 
-<header>
-  <div class="logo">BK</div>
-  <h1>Hello, I'm <span>YURESH BASEL</span></h1>
-  <div class="typing">IT Student • Web Developer • Tech Enthusiast</div>
-  <br>
-  <a class="btn" href="#contact">Contact Me</a>
-  <a class="btn" href="#" onclick="alert('Add your CV later')">Download CV</a>
-</header>
+    <!-- About Section -->
+    <section id="about" class="fade-in">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>I am a BCA student and passionate web developer focused on creating modern, animated, and interactive websites. I enjoy combining clean design with smooth motion to deliver engaging user experiences.</p>
+            <p>I am continuously learning new technologies and improving my skills through real-world projects, with the goal of building a strong career in IT and web development.</p>
+        </div>
+    </section>
 
-<div class="container">
+    <!-- Skills Section -->
+    <section id="skills" class="fade-in">
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="skill-list">
+                <span class="skill">HTML</span>
+                <span class="skill">CSS</span>
+                <span class="skill">JavaScript</span>
+                <span class="skill">PHP</span>
+                <span class="skill">MySQL</span>
+                <span class="skill">Laravel</span>
+                <span class="skill">Git & GitHub</span>
+                <span class="skill">UI/UX Design</span>
+                <span class="skill">Web Animation</span>
+            </div>
+        </div>
+    </section>
 
-<section>
-<h2>👋 About Me</h2>
-<p>
-I am an IT student from Nepal focused on web development, clean UI design,
-and building real-world projects using modern technologies.
-</p>
-</section>
+    <!-- Achievements Section -->
+    <section id="achievements" class="fade-in">
+        <div class="container">
+            <h2>Achievements</h2>
+            <div class="card" onclick="revealCard(this)">
+                <h3>Frontend Development</h3>
+                <p>Built responsive and modern websites using HTML, CSS, and JavaScript.</p>
+            </div>
+            <div class="card" onclick="revealCard(this)">
+                <h3>UI & Animation Design</h3>
+                <p>Created smooth animations, transitions, and interactive user interfaces.</p>
+            </div>
+            <div class="card" onclick="revealCard(this)">
+                <h3>Backend Fundamentals</h3>
+                <p>Worked with PHP and MySQL for backend and database-driven projects.</p>
+            </div>
+            <div class="card" onclick="revealCard(this)">
+                <h3>Academic Journey</h3>
+                <p>Currently pursuing BCA at Oxford College of Engineering and Management.</p>
+            </div>
+        </div>
+    </section>
 
-<section>
-<h2>🛠 Skills</h2>
-HTML<div class="bar"><span style="width:90%"></span></div><br>
-CSS<div class="bar"><span style="width:85%"></span></div><br>
-JavaScript<div class="bar"><span style="width:70%"></span></div><br>
-PHP<div class="bar"><span style="width:65%"></span></div>
-</section>
+    <!-- Projects Section -->
+    <section id="projects" class="fade-in">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="card" onclick="revealCard(this)">
+                <h3>Movie Ticket Booking System</h3>
+                <p>A web-based system with seat selection, booking management, and admin control.</p>
+            </div>
+            <div class="card" onclick="revealCard(this)">
+                <h3>Personal Portfolio Website</h3>
+                <p>An animated single-page portfolio with modern UI and interactive effects.</p>
+            </div>
+        </div>
+    </section>
 
-<section>
-<h2>📂 Projects</h2>
-<p>✔ Movie Ticket Booking System</p>
-<p>✔ Store Management System</p>
-<p>✔ Authentication System</p>
-</section>
+    <!-- Career Goal Section -->
+    <section id="career" class="fade-in">
+        <div class="container">
+            <h2>Career Goal</h2>
+            <p>My goal is to become a skilled web developer, gain professional experience, and build a successful career in the IT field while continuously improving my technical and creative abilities.</p>
+        </div>
+    </section>
 
-<section>
-<h2>🌐 Social</h2>
-<div class="social">
-<a href="#">GitHub</a> |
-<a href="#">LinkedIn</a> |
-<a href="#">Facebook</a>
-</div>
-</section>
+    <!-- Contact Section -->
+    <section id="contact" class="fade-in">
+        <div class="container">
+            <h2>Contact</h2>
+            <p><strong>Location:</strong> Nepal (Open to Remote Opportunities)</p>
+            <p><strong>Email:</strong> <a href="mailto:kanxabasel5@gmail.com" style="color: var(--accent-cyan);">kanxabasel5@gmail.com</a></p>
+            <p><strong>GitHub:</strong> <a href="https://github.com/yourusername" target="_blank" style="color: var(--accent-cyan);">https://github.com/yourusername</a></p>
+            <button class="btn">Get In Touch</button>
+        </div>
+    </section>
 
-<section id="contact">
-<h2>📞 Contact Me</h2>
-<p>Email: <a href="mailto:kanxabasel5@gmail.com">kanxabasel5@gmail.com</a></p>
+    <!-- Cursor Light Effect -->
+    <div class="cursor-light" id="cursor-light"></div>
 
-<form onsubmit="event.preventDefault(); alert('Message sent! (demo)')">
-<input type="text" placeholder="Your Name" required>
-<input type="email" placeholder="Your Email" required>
-<textarea rows="4" placeholder="Your Message"></textarea>
-<button class="btn">Send Message</button>
-</form>
-</section>
+    <!-- Scripts (Lightweight) -->
+    <script>
+        // Simple Scroll Animations (No External Libraries)
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, observerOptions);
 
-</div>
+        document.querySelectorAll('.fade-in, .skill').forEach(el => observer.observe(el));
 
-<a class="whatsapp" href="https://wa.me/" target="_blank">💬</a>
+        // Card Reveal
+        function revealCard(card) {
+            card.style.transform = 'scale(1.05)';
+            setTimeout(() => card.style.transform = 'scale(1)', 300);
+        }
 
-<footer>
-© 2026 Basel Kanxa | Personal Portfolio
-</footer>
+        // Cursor Light
+        document.addEventListener('mousemove', (e) => {
+            const light = document.getElementById('cursor-light');
+            light.style.left = e.clientX - 50 + 'px';
+            light.style.top = e.clientY - 50 + 'px';
+            light.style.opacity = 1;
+        });
+        document.addEventListener('mouseleave', () => {
+            document.getElementById('cursor-light').style.opacity = 0;
+        });
 
+        // Smooth Scroll
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
