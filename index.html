@@ -1,202 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yuresh - Creative Web Developer & UI Animator</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-            --text: #ffffff;
-            --accent-cyan: #00ffff;
-            --accent-purple: #8a2be2;
-            --shadow: rgba(0, 255, 255, 0.3);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        /* Navigation */
-        nav { position: fixed; top: 0; width: 100%; background: rgba(10,10,10,0.9); z-index: 100; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
-        nav a { color: var(--text); text-decoration: none; margin: 0 15px; transition: color 0.3s; }
-        nav a:hover { color: var(--accent-cyan); }
-        
-        /* Hero Section */
-        #hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding-top: 80px; }
-        #hero h1 { font-size: 4rem; font-weight: 600; text-align: center; z-index: 2; background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        #hero .title { font-size: 2rem; margin-top: 10px; }
-        #hero .tagline { font-size: 1.5rem; margin-top: 20px; }
-        
-        /* Sections */
-        section { padding: 100px 0; min-height: 100vh; }
-        .fade-in { opacity: 0; transform: translateY(50px); transition: all 0.8s ease; }
-        .fade-in.in-view { opacity: 1; transform: translateY(0); }
-        
-        /* Interactive Elements */
-        .btn { background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple)); color: #0a0a0a; padding: 15px 30px; border: none; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; }
-        .btn:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--shadow); }
-        
-        .card { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 20px; margin: 20px 0; transition: all 0.3s ease; cursor: pointer; }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px var(--shadow); }
-        
-        .skill-list { display: flex; flex-wrap: wrap; gap: 10px; }
-        .skill { background: var(--accent-cyan); color: #0a0a0a; padding: 10px 15px; border-radius: 20px; font-size: 0.9rem; opacity: 0; transform: scale(0.8); transition: all 0.5s ease; }
-        .skill.in-view { opacity: 1; transform: scale(1); }
-        
-        /* Cursor Light */
-        .cursor-light { position: fixed; width: 100px; height: 100px; background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%); pointer-events: none; z-index: 10; opacity: 0; transition: opacity 0.2s; }
-        
-        /* Responsive */
-        @media (max-width: 768px) { #hero h1 { font-size: 2.5rem; } section { padding: 50px 0; } nav { flex-direction: column; } }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yuresh | BCA Student & Aspiring Web/Backend Developer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --card: rgba(255,255,255,0.75);
+      --card-border: rgba(226,232,240,0.8);
+      --primary: #3b82f6;
+      --primary-dark: #2563eb;
+      --accent: #10b981;
+      --muted: #64748b;
+    }
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --text: #e2e8f0;
+      --card: rgba(30,41,59,0.75);
+      --card-border: rgba(51,65,85,0.6);
+      --primary: #60a5fa;
+      --primary-dark: #3b82f6;
+      --accent: #34d399;
+      --muted: #94a3b8;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: all 0.4s ease;
+    }
+    html { scroll-behavior: smooth; }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(15,23,42,0.65);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s;
+    }
+    nav.scrolled { background: rgba(15,23,42,0.95); padding: 0.8rem 5%; box-shadow: 0 4px 20px rgba(0,0,0,0.25); }
+
+    .logo { font-size: 1.5rem; font-weight: 800; color: white; }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
+      background: var(--primary); transition: width 0.35s;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--primary); }
+
+    .theme-toggle { background:none; border:none; color:white; font-size:1.3rem; cursor:pointer; }
+
+    header {
+      height: 100vh;
+      min-height: 680px;
+      background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 5%;
+    }
+    .hero h1 {
+      font-size: clamp(3.5rem, 9vw, 6rem);
+      margin-bottom: 0.8rem;
+      background: linear-gradient(90deg, #60a5fa, #a5b4fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero .tagline { font-size: clamp(1.4rem, 4vw, 1.9rem); opacity: 0.9; margin: 1.2rem 0 2.5rem; }
+
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.9rem 2.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0.6rem;
+      transition: all 0.35s;
+      box-shadow: 0 6px 20px rgba(59,130,246,0.3);
+    }
+    .btn:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(59,130,246,0.45); }
+    .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+
+    section {
+      padding: 100px 5% 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h2 {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--primary);
+      position: relative;
+    }
+    h2::after {
+      content: ''; width: 100px; height: 5px; background: var(--primary);
+      position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%);
+      border-radius: 3px;
+    }
+
+    .card {
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.5s ease;
+    }
+    .card.visible { opacity: 1; transform: translateY(0); }
+
+    .skills-grid, .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .skill-category h3 { margin-bottom: 1rem; color: var(--primary); font-size: 1.4rem; }
+
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+    .skill-tag {
+      background: var(--primary);
+      color: white;
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+
+    .project-features { margin-top: 1.2rem; padding-left: 1.2rem; }
+    .project-features li { margin-bottom: 0.6rem; }
+
+    #contact form {
+      max-width: 680px;
+      margin: 0 auto 2rem;
+      display: grid;
+      gap: 1.4rem;
+    }
+    input, textarea {
+      padding: 1rem 1.4rem;
+      border: 1px solid var(--muted);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.07);
+      color: var(--text);
+      font-size: 1rem;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    }
+    textarea { min-height: 150px; }
+
+    #back-to-top {
+      position: fixed;
+      bottom: 30px; right: 30px;
+      background: var(--primary);
+      color: white;
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      cursor: pointer;
+      opacity: 0; visibility: hidden;
+      transition: all 0.4s;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+    #back-to-top.visible { opacity: 1; visibility: visible; }
+
+    footer {
+      background: rgba(15,23,42,0.9);
+      color: #cbd5e1;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links a { margin: 0 0.8rem; font-size: 0.95rem; }
+      section { padding: 80px 6% 60px; }
+    }
+  </style>
 </head>
-<body>
-    <!-- Navigation -->
-    <nav>
-        <div>Yuresh</div>
-        <div>
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#achievements">Achievements</a>
-            <a href="#projects">Projects</a>
-            <a href="#career">Career</a>
-            <a href="#contact">Contact</a>
+<body data-theme="dark">
+
+  <nav id="navbar">
+    <div class="logo">Yuresh</div>
+    <div class="nav-links">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="theme-toggle" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+  </nav>
+
+  <header id="home">
+    <div class="hero">
+      <h1>Yuresh</h1>
+      <p class="tagline">BCA Student • Aspiring Web / Backend Developer (PHP • Laravel)</p>
+      <a href="#projects" class="btn">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <div class="card">
+      <p>I'm a 7th semester BCA student at <strong>Oxford College of Engineering & Management</strong>, Pokhara University, Nepal.</p>
+      <p>Motivated to become a professional <strong>Web / Backend Developer</strong> specializing in <strong>PHP</strong> and <strong>Laravel</strong>. My aim is to secure a stable IT job (preferably remote or in the USA), gain valuable industry experience, and eventually start my own business.</p>
+      <p>Passionate about practical learning, building real-world projects, writing clean & maintainable code, and continuously improving my skills.</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="card">
+        <h3 class="skill-category">Frontend</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">HTML</span>
+          <span class="skill-tag">CSS</span>
+          <span class="skill-tag">JavaScript</span>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="hero">
-        <div class="container">
-            <h1>Yuresh</h1>
-            <p class="title">Creative Web Developer & UI Animator</p>
-            <p class="tagline">Building modern, animated, and interactive web experiences</p>
-            <button class="btn" onclick="scrollToSection('about')">Explore My Work</button>
+      </div>
+      <div class="card">
+        <h3 class="skill-category">Backend</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Core PHP</span>
+          <span class="skill-tag">Laravel Framework</span>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="fade-in">
-        <div class="container">
-            <h2>About Me</h2>
-            <p>I am a BCA student and passionate web developer focused on creating modern, animated, and interactive websites. I enjoy combining clean design with smooth motion to deliver engaging user experiences.</p>
-            <p>I am continuously learning new technologies and improving my skills through real-world projects, with the goal of building a strong career in IT and web development.</p>
+      </div>
+      <div class="card">
+        <h3 class="skill-category">Database</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">MySQL</span>
         </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="fade-in">
-        <div class="container">
-            <h2>Skills</h2>
-            <div class="skill-list">
-                <span class="skill">HTML</span>
-                <span class="skill">CSS</span>
-                <span class="skill">JavaScript</span>
-                <span class="skill">PHP</span>
-                <span class="skill">MySQL</span>
-                <span class="skill">Laravel</span>
-                <span class="skill">Git & GitHub</span>
-                <span class="skill">UI/UX Design</span>
-                <span class="skill">Web Animation</span>
-            </div>
+      </div>
+      <div class="card">
+        <h3 class="skill-category">Web & Software Concepts</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">MVC Architecture</span>
+          <span class="skill-tag">CRUD Operations</span>
+          <span class="skill-tag">Authentication Systems</span>
+          <span class="skill-tag">Role-based Login</span>
+          <span class="skill-tag">HTTP Protocol</span>
+          <span class="skill-tag">Cookies & Sessions</span>
+          <span class="skill-tag">Form Handling</span>
+          <span class="skill-tag">JSP Basics</span>
         </div>
-    </section>
-
-    <!-- Achievements Section -->
-    <section id="achievements" class="fade-in">
-        <div class="container">
-            <h2>Achievements</h2>
-            <div class="card" onclick="revealCard(this)">
-                <h3>Frontend Development</h3>
-                <p>Built responsive and modern websites using HTML, CSS, and JavaScript.</p>
-            </div>
-            <div class="card" onclick="revealCard(this)">
-                <h3>UI & Animation Design</h3>
-                <p>Created smooth animations, transitions, and interactive user interfaces.</p>
-            </div>
-            <div class="card" onclick="revealCard(this)">
-                <h3>Backend Fundamentals</h3>
-                <p>Worked with PHP and MySQL for backend and database-driven projects.</p>
-            </div>
-            <div class="card" onclick="revealCard(this)">
-                <h3>Academic Journey</h3>
-                <p>Currently pursuing BCA at Oxford College of Engineering and Management.</p>
-            </div>
+      </div>
+      <div class="card">
+        <h3 class="skill-category">Networking</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">OSI Model</span>
+          <span class="skill-tag">TCP/IP Model</span>
+          <span class="skill-tag">IPv4 / IPv6</span>
+          <span class="skill-tag">CIDR / VLSM</span>
+          <span class="skill-tag">Error Detection & Correction</span>
+          <span class="skill-tag">Sliding Window Protocol</span>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="fade-in">
-        <div class="container">
-            <h2>Projects</h2>
-            <div class="card" onclick="revealCard(this)">
-                <h3>Movie Ticket Booking System</h3>
-                <p>A web-based system with seat selection, booking management, and admin control.</p>
-            </div>
-            <div class="card" onclick="revealCard(this)">
-                <h3>Personal Portfolio Website</h3>
-                <p>An animated single-page portfolio with modern UI and interactive effects.</p>
-            </div>
-        </div>
-    </section>
+  <section id="projects" style="background: linear-gradient(to bottom, var(--bg), rgba(30,41,59,0.15));">
+    <h2>Major Projects</h2>
+    <div class="projects-grid">
+      <div class="card">
+        <h3>Movie Ticket Booking System (Core PHP – Main Project)</h3>
+        <ul class="project-features">
+          <li>Role-based Admin & User login</li>
+          <li>Movie management (Admin panel)</li>
+          <li>Interactive seat selection (QFX cinema style)</li>
+          <li>Ticket booking + rescheduling (before 2 hours of showtime)</li>
+          <li>QR code ticket generation & unique ticket number</li>
+          <li>Cash payment simulation</li>
+          <li>MySQL database backend</li>
+        </ul>
+        <p><em>Technologies: HTML, CSS, JavaScript, Core PHP, MySQL</em></p>
+      </div>
 
-    <!-- Career Goal Section -->
-    <section id="career" class="fade-in">
-        <div class="container">
-            <h2>Career Goal</h2>
-            <p>My goal is to become a skilled web developer, gain professional experience, and build a successful career in the IT field while continuously improving my technical and creative abilities.</p>
-        </div>
-    </section>
+      <div class="card">
+        <h3>Laravel Movie Ticket Booking System</h3>
+        <ul class="project-features">
+          <li>Laravel Breeze authentication</li>
+          <li>Admin/User role middleware</li>
+          <li>Protected dashboard routing</li>
+          <li>Full MVC structure</li>
+          <li>Role-based access control</li>
+        </ul>
+        <p><em>Technologies: Laravel, MySQL, Blade templating</em></p>
+      </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="fade-in">
-        <div class="container">
-            <h2>Contact</h2>
-            <p><strong>Location:</strong> Nepal (Open to Remote Opportunities)</p>
-            <p><strong>Email:</strong> <a href="mailto:kanxabasel5@gmail.com" style="color: var(--accent-cyan);">kanxabasel5@gmail.com</a></p>
-            <p><strong>GitHub:</strong> <a href="https://github.com/yourusername" target="_blank" style="color: var(--accent-cyan);">https://github.com/yourusername</a></p>
-            <button class="btn">Get In Touch</button>
-        </div>
-    </section>
+      <div class="card">
+        <h3>MealBox – Food Ordering Website</h3>
+        <ul class="project-features">
+          <li>Modern responsive frontend design</li>
+          <li>User-friendly meal selection interface</li>
+          <li>Backend integration (planned / in progress)</li>
+        </ul>
+        <p><em>Technologies: HTML, CSS, JavaScript (Laravel backend planned)</em></p>
+      </div>
 
-    <!-- Cursor Light Effect -->
-    <div class="cursor-light" id="cursor-light"></div>
+      <div class="card">
+        <h3>Personal Portfolio Website</h3>
+        <ul class="project-features">
+          <li>Creative & responsive UI</li>
+          <li>About, Skills, Projects sections</li>
+          <li>Developer personal branding</li>
+        </ul>
+        <p><em>Technologies: HTML, CSS, JavaScript</em></p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Scripts (Lightweight) -->
-    <script>
-        // Simple Scroll Animations (No External Libraries)
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('in-view');
-                }
-            });
-        }, observerOptions);
+  <section id="experience">
+    <h2>Internship Experience</h2>
+    <div class="card">
+      <h3>Nepal Telecom (NTC) – IT / Networking Intern</h3>
+      <p>Hands-on exposure to real telecom environment including:</p>
+      <ul>
+        <li>Networking fundamentals in production</li>
+        <li>System & infrastructure handling</li>
+        <li>Office IT operations</li>
+        <li>Applied academic networking concepts practically</li>
+      </ul>
+      <p>This internship successfully bridged theoretical knowledge with real-world industry practice.</p>
+    </div>
+  </section>
 
-        document.querySelectorAll('.fade-in, .skill').forEach(el => observer.observe(el));
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form id="contact-form">
+      <input type="text" placeholder="Your Name" required/>
+      <input type="email" placeholder="Your Email" required/>
+      <textarea placeholder="Message – e.g. internship/job opportunity, collaboration..." required></textarea>
+      <button type="submit" class="btn" style="width:100%;">Send Message</button>
+    </form>
+    <p style="text-align:center; margin-top:2rem; color:var(--muted);">
+      Nepal • Open to remote opportunities (especially USA) • Currently in 7th semester BCA
+    </p>
+  </section>
 
-        // Card Reveal
-        function revealCard(card) {
-            card.style.transform = 'scale(1.05)';
-            setTimeout(() => card.style.transform = 'scale(1)', 300);
-        }
+  <div id="back-to-top"><i class="fas fa-arrow-up"></i></div>
 
-        // Cursor Light
-        document.addEventListener('mousemove', (e) => {
-            const light = document.getElementById('cursor-light');
-            light.style.left = e.clientX - 50 + 'px';
-            light.style.top = e.clientY - 50 + 'px';
-            light.style.opacity = 1;
-        });
-        document.addEventListener('mouseleave', () => {
-            document.getElementById('cursor-light').style.opacity = 0;
-        });
+  <footer>
+    <p>© 2026 Yuresh • Aspiring PHP & Laravel Developer • Nepal</p>
+  </footer>
 
-        // Smooth Scroll
-        function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-        }
-    </script>
+  <script>
+    // Theme toggle + save preference
+    const toggle = document.querySelector('.theme-toggle');
+    const body = document.body;
+    const icon = toggle.querySelector('i');
+
+    function setTheme(theme) {
+      body.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      icon.classList.toggle('fa-moon', theme === 'dark');
+      icon.classList.toggle('fa-sun', theme === 'light');
+    }
+
+    setTheme(localStorage.getItem('theme') || 'dark');
+
+    toggle.addEventListener('click', () => {
+      const newTheme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      setTheme(newTheme);
+    });
+
+    // Navbar scroll + active link
+    const nav = document.getElementById('navbar');
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 100);
+
+      let current = '';
+      sections.forEach(sec => {
+        const top = sec.offsetTop - 160;
+        if (pageYOffset >= top) current = sec.getAttribute('id');
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
+      });
+    });
+
+    // Reveal cards on scroll
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.15 });
+
+    cards.forEach(card => observer.observe(card));
+
+    // Back to top
+    const btt = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      btt.classList.toggle('visible', window.scrollY > 500);
+    });
+    btt.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+    // Contact form demo feedback
+    document.getElementById('contact-form').addEventListener('submit', e => {
+      e.preventDefault();
+      alert("Thank you! Your message has been recorded (demo). In production, connect to Formspree/Getform/etc.");
+      e.target.reset();
+    });
+  </script>
 </body>
 </html>
